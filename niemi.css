@@ -1,0 +1,322 @@
+:root {
+    --primary: #0284c7;
+    --primary-dark: #0369a1;
+    --background: #f8fafc;
+    --surface: #ffffff;
+    --text: #0f172a;
+    --text-light: #64748b;
+    --border: #cbd5e1;
+    --success: #16a34a;
+    --danger: #e11d48;
+    --accent: #f1f5f9;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+}
+
+body {
+    background-color: var(--background);
+    color: var(--text);
+    padding: 16px;
+    line-height: 1.4;
+}
+
+.container {
+    max-width: 1600px;
+    margin: 0 auto;
+}
+
+header {
+    margin-bottom: 20px;
+    padding-bottom: 16px;
+    border-bottom: 2px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+h1 { font-size: 22px; font-weight: 700; color: #0f172a; }
+h2 { font-size: 16px; margin-bottom: 12px; font-weight: 600; color: #1e293b; border-bottom: 1px solid var(--border); padding-bottom: 4px; }
+h3 { font-size: 15px; margin-bottom: 8px; font-weight: 600; color: #334155; }
+
+.section-divider {
+    margin: 32px 0 16px 0;
+    padding-top: 16px;
+    border-top: 3px double var(--border);
+}
+
+.grid-main {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+}
+
+@media (min-width: 1024px) {
+   .grid-main { grid-template-columns: 380px 1fr; }
+}
+
+.card {
+   background: var(--surface);
+   border: 1px solid var(--border);
+   border-radius: 8px;
+   padding: 16px;
+   box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+   height: fit-content;
+}
+
+.form-group {
+   margin-bottom: 12px;
+}
+
+label {
+   display: block;
+   margin-bottom: 4px;
+   font-weight: 600;
+   font-size: 13px;
+   color: #334155;
+}
+
+input, select, textarea {
+   width: 100%;
+   padding: 8px 10px;
+   border: 1px solid var(--border);
+   border-radius: 6px;
+   font-size: 15px;
+   background: #fff;
+}
+
+input:focus, select:focus, textarea:focus {
+   outline: 2px solid var(--primary);
+}
+
+button {
+   background-color: var(--primary);
+   color: white;
+   padding: 10px 16px;
+   border: none;
+   border-radius: 6px;
+   cursor: pointer;
+   font-size: 14px;
+   font-weight: 600;
+   width: 100%;
+   transition: background 0.15s;
+}
+
+button:hover { background-color: var(--primary-dark); }
+button.secondary { background-color: #64748b; }
+button.secondary:hover { background-color: #475569; }
+button.danger { background-color: var(--danger); }
+button.danger:hover { background-color: #be123c; }
+
+.matrix-container {
+   background: var(--accent);
+   padding: 12px;
+   border-radius: 6px;
+   margin-top: 8px;
+   border: 1px dashed var(--border);
+}
+
+.matrix-row {
+   display: grid;
+   grid-template-columns: 1fr 100px;
+   gap: 8px;
+   align-items: center;
+   margin-bottom: 6px;
+}
+
+.matrix-row label { margin-bottom: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+.table-container {
+   overflow-x: auto;
+   margin-top: 8px;
+}
+
+table {
+   width: 100%;
+   border-collapse: collapse;
+   text-align: left;
+   font-size: 13px;
+}
+
+th, td {
+   padding: 10px 12px;
+   border: 1px solid var(--border);
+}
+
+th {
+   background-color: #f1f5f9;
+   color: #1e293b;
+   font-weight: 600;
+}
+
+.summary-ribbon {
+   display: grid;
+   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+   gap: 12px;
+   margin-bottom: 20px;
+}
+
+.stat-card {
+   background: var(--surface);
+   padding: 12px;
+   border-radius: 6px;
+   border: 1px solid var(--border);
+   text-align: center;
+}
+
+.stat-val {
+   font-size: 18px;
+   font-weight: 700;
+   color: var(--primary);
+}
+
+.config-grid {
+   display: grid;
+   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+   gap: 16px;
+}
+
+.radio-group {
+   display: flex;
+   gap: 12px;
+   background: #f1f5f9;
+   padding: 6px;
+   border-radius: 6px;
+}
+
+.radio-option {
+   flex: 1;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   gap: 6px;
+   cursor: pointer;
+   font-weight: 600;
+   font-size: 13px;
+}
+
+.radio-option input { width: auto; cursor: pointer; }
+
+.multiselect-container {
+    position: relative;
+    width: 100%;
+    max-width: 300px;
+    font-family: Arial, sans-serif;
+    user-select: none;
+}
+
+/* The visible box you click */
+.select-box {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 10px;
+    background-color: #fff;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    min-height: 38px;
+    box-sizing: border-box;
+    position: relative;
+}
+
+/* Arrow indicator */
+.select-box::after {
+    content: "▼";
+    font-size: 10px;
+    color: #666;      
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    transition: transform 0.2s ease;
+}
+
+/* Rotate arrow when dropdown is active */
+.multiselect-container.active .select-box::after {
+    transform: translateY(-50%) rotate(180deg);
+}
+
+/* Display lists ONLY when parent multiselect has .active class */
+.multiselect-container.active .dropdown-list {
+    display: block;
+}
+
+/* Dropdown option list container */
+.dropdown-list {
+    display: none; /* Hidden by default */
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    border: 1px solid #ccc;
+    border-top: none;
+    background: #fff;
+    max-height: 200px;
+    overflow-y: auto;
+    z-index: 1000;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+/* Individual option rows */
+.option-item {
+    display: flex;
+    align-items: center;
+    padding: 8px 12px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+/* Highlight option on hover */
+.option-item:hover {
+    background-color: #f0f0f0;
+}
+
+/* Space out the checkbox from the text label */
+.option-item input[type="checkbox"] {
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+/* Flex wrapper for dynamic tags */
+.tags-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    align-items: center;
+}
+
+/* Placeholder text when empty */
+.placeholder {
+    color: #aaa;
+    font-size: 14px;
+    line-height: 24px;
+}
+
+/* Closable Tag styling */
+.tag {
+    background-color: #e0e0e0;
+    color: #333;
+    padding: 2px 8px;
+    border-radius: 3px;
+    font-size: 13px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.tag-close {
+    cursor: pointer;
+    font-weight: bold;
+    color: #888;
+}
+
+.tag-close:hover {
+    color: #cc0000;
+}

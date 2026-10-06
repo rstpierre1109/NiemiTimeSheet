@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Niemi Corporation Timesheet</title>
+
+  <!-- Link your web manifest -->
+  <link rel="manifest" href="manifest.json">
+
+  <!-- 1. Ensure this path points exactly to your separate CSS file -->
+  <link rel="stylesheet" href="./niemi.css">
+</head>
+<body>
+
+<div class="container">
+
+    <header style="display: flex; justify-content: space-between; align-items: center;">
+        <div style="display: flex; align-items: center; gap: 12px;">
+            <img src="Niemi.png" alt="Niemi Corporation Logo" style="height: 80px; width: auto; display: block;">
+            <div>
+                <h1 style="margin: 0; font-size: 24px;">Timesheet</h1>
+                <p style="color: var(--text-light); font-size: 13px; margin: 4px 0 0 0;">Unhosted browser client. Core Edge and iPad verified version.</p>
+            </div>
+        </div>
+    
+        <!-- Action Buttons Layout Section -->
+        <div style="display: flex; gap: 8px;">
+            <!-- Renamed to Export Timesheet and pointing to exportTimesheetCSV() -->
+            <button type="button" class="secondary" onclick="exportTimesheetCSV()" style="width: auto;">Export Timesheet</button>
+            <button type="button" class="danger" onclick="clearLoggedHoursOnly()" style="width: auto;">Clear Logged Hours</button>
+        </div>
+    </header>
+
+    <!-- LIVE TRACKING SUMMARY WORKSPACE -->
+    <div class="summary-ribbon">
+        <div class="stat-card"><label>Total Logged Labor Hours</label><div class="stat-val" id="total-labor-hrs">0.00</div></div>
+        <div class="stat-card"><label>Total Logged Equip Hours</label><div class="stat-val" id="total-equip-hrs">0.00</div></div>
+        <div class="stat-card"><label>Active Registered Jobs</label><div class="stat-val" id="total-jobs-count">0</div></div>
+    </div>
+
+    <div class="grid-main">
+        <!-- Left Column: Allocation Form Sidebar -->
+        <div class="card">
+            <h2>✍️ Timesheet Allocation Entry</h2>
+            <form id="matrix-entry-form" onsubmit="event.preventDefault();">
+                <div class="form-group">
+                    <label for="input-date">Date</label>
+                    <input type="date" id="input-date" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="select-job">Job ID / Code</label>
+                    <select id="select-job" required>
+                        <option value="">-- Select Job --</option>
+                    </select>
+                </div>
+
+                <!-- 1. Employee Multi-Select Container -->
+                <div class="form-group">
+                    <label>Employees</label>
+                    <div class="multiselect-container" id="multiselect-emp">
+                      <div class="select-box" id="selectBoxEmp">
+                        <div class="tags-container" id="tagsContainerEmp">
+                          <span class="placeholder">Select Employees</span>
+                        </div>
+                      </div>
+                      <div class="dropdown-list" id="checkboxContainerEmp"></div>
+                    </div>
+                </div>
+
+                <!-- 2. Equipment Multi-Select Container -->
+                <div class="form-group">
+                    <label>Equipment Assets</label>
+                    <div class="multiselect-container" id="multiselect-equip">
+                      <div class="select-box" id="selectBoxEquip">
+                        <div class="tags-container" id="tagsContainerEquip">
+                          <span class="placeholder">Select Equipment</span>
+                        </div>
+                      </div>
+                      <div class="dropdown-list" id="checkboxContainerEquip"></div>
+                    </div>
+                </div>
+
+                <!-- 3. Job Phases Multi-Select Container -->
+                <div class="form-group">
+                    <label>Job Phases</label>
+                    <div class="multiselect-container" id="multiselect-phase">
+                      <div class="select-box" id="selectBoxPhase">
+                        <div class="tags-container" id="tagsContainerPhase">
+                          <span class="placeholder">Select Job Phases</span>
+                        </div>
+                      </div>
+                      <div class="dropdown-list" id="checkboxContainerPhases"></div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="input-notes">Task Remarks / Logs</label>
+                    <textarea id="input-notes" rows="2" placeholder="Optional context info..."></textarea>
+                </div>
+
+                <button type="button" onclick="if(typeof submitMatrixLog === 'function') submitMatrixLog(event)">Build Timesheet</button>
+            </form>
+        </div>
+
+        <!-- Right Column: Live Sheet Log Overview Panel -->
+        <div class="card">
+            <h2>📋 Time & Equipment Allocation Sheet</h2>
+            <!-- Active Job Information Meta Banner Display Banner -->
+            <div id="active-job-banner" style="background-color: #f1f5f9; border: 1px solid #cbd5e1; border-radius: 4px; padding: 12px; margin-bottom: 16px; display: none;">
+                <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; font-size: 14px;">
+                    <div><strong>Job Number:</strong> <span id="lbl-job-num">-</span></div>
+                    <div><strong>Project Name:</strong> <span id="lbl-job-project">-</span></div>
+                    <div><strong>Contractor:</strong> <span id="lbl-job-contractor">-</span></div>
+                    <div><strong>Owner:</strong> <span id="lbl-job-owner">-</span></div>
+                </div>
+            </div>
+
+            <!-- Allocation Input Grid Table Container -->
+            <div class="table-container">
+                <table id="matrix-display-table" style="width: 100%; border-collapse: collapse; text-align: left;">
+                    <thead>
+                        <!-- Column headers will be dynamically generated by JS -->
+                    </thead>
+                    <tbody id="matrix-table-body">
+                        <!-- Rows with input cells will be dynamically injected by JS -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- DEDICATED MASTER LIST DATA CONFIGURATOR PANELS -->
+    <div class="section-divider">
+        <h2>📁 Master Settings & Dropdown Lists Management
+            <button id="downloadBtn" type="button" style="margin-left: 15px; background-color: #28a745; color: white; padding: 6px 12px; font-size: 14px; border: none; border-radius: 4px; cursor: pointer;">Save Corporate Data</button>
+            <input type="file" id="uploadCorporateFile" accept=".json" style="display:none;">
+        </h2>
+        <p style="color: var(--text-light); font-size: 13px; margin-bottom: 16px;">Add your parameters here. Your changes will immediately populate the drop-down boxes above.</p>
+    </div>
+
+    <div class="config-grid">
+        <!-- Job ID Creator Box -->
+        <div class="card">
+            <h3>Manage Job IDs</h3>
+            <div class="form-group inline-fields">
+                <input type="text" id="config-job-name-1" placeholder="e.g. JOB Number ex: 26-320-10">
+                <input type="text" id="config-job-name-2" placeholder="e.g. Contractor Name">
+                <input type="text" id="config-job-name-3" placeholder="e.g. Owner Name">
+                <input type="text" id="config-job-name-4" placeholder="e.g. Project Name">
+            </div>
+            <button type="button" id="addBtn">Add Job ID Details</button>
+            <div class="table-container" style="max-height: 200px;"><table id="table-config-jobs"><tbody></tbody></table></div>
+        </div>
+
+        <!-- Employee Creator Box -->
+        <div class="card">
+            <h3>Manage Employees</h3>
+            <div class="form-group inline-fields">
+                <input type="text" id="config-emp-name-1" placeholder="e.g. Emp Name">
+                <input type="text" id="config-emp-name-2" placeholder="e.g. Emp Class">
+            </div>
+            <button type="button" id="addEmpBtn">Add Employee</button>
+            <div class="table-container" style="max-height: 200px;"><table id="table-config-employees"><tbody></tbody></table></div>
+        </div>
+
+        <!-- Equipment Assets Creator Box -->
+        <div class="card">
+            <h3>Manage Equipment Assets</h3>
+            <div class="form-group">
+                <input type="text" id="config-eq-name" placeholder="e.g. Excavator #4">
+            </div>
+            <button type="button" id="addEquipmentBtn">Add Equipment</button>
+            <div class="table-container" style="max-height: 200px;"><table id="table-config-equipment"><tbody></tbody></table></div>
+        </div>
+
+        <!-- Job Phase Column Creator Box -->
+        <div class="card">
+            <h3>Manage Job Phases</h3>
+            <div class="form-group">
+                <input type="text" id="config-phase-name" placeholder="e.g. Phase 1: Setup">
+            </div>
+            <button type="button" id="addPhaseBtn">Add Phase Column</button>
+            <div class="table-container" style="max-height: 200px;"><table id="table-config-phases"><tbody></tbody></table></div>
+        </div>
+    </div>
+</div>
+<script src="./Niemi.js"></script>
+</body>
+</html>
