@@ -1,0 +1,26 @@
+{
+  "jobs": [
+    {
+      "JobNumber": "43634",
+      "Contractor": "ert",
+      "Owner": "ag",
+      "Project": "aadfg"
+    }
+  ],
+  "employees": [
+    {
+      "Name": "Estelle",
+      "Class": "newemp"
+    }
+  ],
+  "equipment": [
+    {
+      "EquipmentName": "sandtruch"
+    }
+  ],
+  "phases": [
+    {
+      "PhaseName": "phase2"
+    }
+  ]
+}
