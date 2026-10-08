@@ -229,32 +229,98 @@ function refreshAllManagementTables() {
 // ==========================================
 // SYSTEM AUTO-LOAD TRIGGER (ON LAUNCH)
 // ==========================================
-document.addEventListener('DOMContentLoaded', function() {
-    const savedLocalSession = localStorage.getItem('niemi_corporate_master_list');
-    
-    if (savedLocalSession) {
-        try {
-            const parsedBackup = JSON.parse(savedLocalSession);
-            if (parsedBackup && typeof parsedBackup === 'object') {
-                corporateData.jobs = parsedBackup.jobs || [];
-                corporateData.employees = parsedBackup.employees || [];
-                corporateData.equipment = parsedBackup.equipment || [];
-                corporateData.phases = parsedBackup.phases || [];
-                console.log("Master lists successfully populated from internal browser cache storage.");
+//document.addEventListener('DOMContentLoaded', function() {
+//    const savedLocalSession = localStorage.getItem('niemi_corporate_master_list');
+//    
+//    if (savedLocalSession) {
+//        try {
+//            const parsedBackup = JSON.parse(savedLocalSession);
+//            if (parsedBackup && typeof parsedBackup === 'object') {
+//                corporateData.jobs = parsedBackup.jobs || [];
+//                corporateData.employees = parsedBackup.employees || [];
+//                corporateData.equipment = parsedBackup.equipment || [];
+//                corporateData.phases = parsedBackup.phases || [];
+//                console.log("Master lists successfully populated from internal browser cache storage.");
+//            }
+//        } catch (e) {
+//            console.error("Bypassed corrupt storage sequence stream:", e);
+//        }
+//    }
+//
+//    refreshAllManagementTables();
+//    
+//    // 1. Setup persistent window click handlers ONCE
+//    initDropdownEvents('multiselect-emp', 'selectBoxEmp', 'tagsContainerEmp', 'selected-employees');
+//    initDropdownEvents('multiselect-equip', 'selectBoxEquip', 'tagsContainerEquip', 'selected-equipment');
+//    initDropdownEvents('multiselect-phase', 'selectBoxPhase', 'tagsContainerPhase', 'selected-phases');
+//
+//    // 2. Inject parameters from localStorage data cache pipelines
+//    populateTimesheetPicklists();
+//
+//    // Global document listener to handle outer clicks and minimize dropdown boxes automatically
+//    document.addEventListener('click', function(e) {
+//        if (!e.target.closest('.multiselect-container')) {
+//            document.querySelectorAll('.multiselect-container').forEach(el => el.classList.remove('active'));
+//        }
+//    });
+//});
+
+// ==========================================
+// SYSTEM AUTO-LOAD TRIGGER (ON LAUNCH)
+// ==========================================
+document.addEventListener('DOMContentLoaded', async function() {
+    let dataLoaded = false;
+
+    // 1. TRY LOADING FROM THE JSON FILE (GitHub Pages / Local Server)
+    try {
+        // Adjust the path if 'corporate_master_settings.json' is in a subfolder (e.g., './data/corporate_master_settings.json')
+        const response = await fetch('./corporate_master_settings.json');
+        
+        if (!response.ok) {
+            throw new Error(`Network response was not ok: ${response.status}`);
+        }
+        
+        const parsedBackup = await response.json();
+        if (parsedBackup && typeof parsedBackup === 'object') {
+            corporateData.jobs = parsedBackup.jobs || [];
+            corporateData.employees = parsedBackup.employees || [];
+            corporateData.equipment = parsedBackup.equipment || [];
+            corporateData.phases = parsedBackup.phases || [];
+            console.log("Master lists successfully populated from corporate_master_settings.json file.");
+            dataLoaded = true;
+        }
+    } catch (fileError) {
+        console.warn("Could not load JSON file. Attempting browser cache fallback...", fileError);
+    }
+
+    // 2. FALLBACK: IF FILE LOADING FAILED, TRY BROWSER CACHE
+    if (!dataLoaded) {
+        const savedLocalSession = localStorage.getItem('niemi_corporate_master_list');
+        if (savedLocalSession) {
+            try {
+                const parsedBackup = JSON.parse(savedLocalSession);
+                if (parsedBackup && typeof parsedBackup === 'object') {
+                    corporateData.jobs = parsedBackup.jobs || [];
+                    corporateData.employees = parsedBackup.employees || [];
+                    corporateData.equipment = parsedBackup.equipment || [];
+                    corporateData.phases = parsedBackup.phases || [];
+                    console.log("Master lists successfully populated from internal browser cache storage fallback.");
+                }
+            } catch (e) {
+                console.error("Bypassed corrupt storage sequence stream:", e);
             }
-        } catch (e) {
-            console.error("Bypassed corrupt storage sequence stream:", e);
         }
     }
 
+    // 3. UI INITIALIZATION & EVENT HANDLERS
     refreshAllManagementTables();
     
-    // 1. Setup persistent window click handlers ONCE
+    // Setup persistent window click handlers ONCE
     initDropdownEvents('multiselect-emp', 'selectBoxEmp', 'tagsContainerEmp', 'selected-employees');
     initDropdownEvents('multiselect-equip', 'selectBoxEquip', 'tagsContainerEquip', 'selected-equipment');
     initDropdownEvents('multiselect-phase', 'selectBoxPhase', 'tagsContainerPhase', 'selected-phases');
 
-    // 2. Inject parameters from localStorage data cache pipelines
+    // Inject parameters from data pipelines
     populateTimesheetPicklists();
 
     // Global document listener to handle outer clicks and minimize dropdown boxes automatically
@@ -264,6 +330,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 });
+
 
 // ==========================================
 // PANEL CLICK DATA APPENDER LISTENERS
