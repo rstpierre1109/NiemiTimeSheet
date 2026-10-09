@@ -1,26 +1,272 @@
 {
   "jobs": [
     {
-      "JobNumber": "43634",
-      "Contractor": "ert",
-      "Owner": "ag",
-      "Project": "aadfg"
+      "JobNumber": "26-323-09",
+      "Contractor": "Thomas Seabold & Associates",
+      "Owner": ".",
+      "Project": "703 Lone Pine Hill-Mat Rental"
     }
   ],
   "employees": [
     {
-      "Name": "Estelle",
-      "Class": "newemp"
+      "Name": "Sam Hall",
+      "Class": "Pile Driver Foreman"
+    },
+    {
+      "Name": "Jeff Altherr",
+      "Class": "Pile Driver Foreman"
+    },
+    {
+      "Name": "Zach Dusseau",
+      "Class": "Operator"
+    },
+    {
+      "Name": "Justin Wehrheim",
+      "Class": "Operator"
     }
   ],
   "equipment": [
     {
-      "EquipmentName": "sandtruch"
+      "EquipmentName": "2017 Ford F-250"
+    },
+    {
+      "EquipmentName": "2022 Ford F-250"
+    },
+    {
+      "EquipmentName": "CAT 336 EL Excavator"
+    },
+    {
+      "EquipmentName": "CAT 308 E2 Excavator"
+    },
+    {
+      "EquipmentName": "CAT 289D Compact Loader"
+    },
+    {
+      "EquipmentName": "Movax Sonic SideGrip SP100"
+    },
+    {
+      "EquipmentName": "Texoma Drill Rig"
+    },
+    {
+      "EquipmentName": "Talbert Lowboy"
+    },
+    {
+      "EquipmentName": "Reitnouer Trailer"
+    },
+    {
+      "EquipmentName": "American Tag Trailer"
+    },
+    {
+      "EquipmentName": "42' Trailer"
+    },
+    {
+      "EquipmentName": "45' Trailer"
+    },
+    {
+      "EquipmentName": "Peterbilt Semi"
+    },
+    {
+      "EquipmentName": "Yard Skytrak"
+    },
+    {
+      "EquipmentName": "Skytrak 8042"
+    },
+    {
+      "EquipmentName": "Du-op Welder"
+    },
+    {
+      "EquipmentName": "Big Blue Welder"
+    },
+    {
+      "EquipmentName": "Lincoln Welder"
+    },
+    {
+      "EquipmentName": "Trailblazer Welder"
+    },
+    {
+      "EquipmentName": "H & M 2700 Vibro"
+    },
+    {
+      "EquipmentName": "H & M H-75B Vibro"
+    },
+    {
+      "EquipmentName": "2016 Kubota Tractor"
+    },
+    {
+      "EquipmentName": "Delmag 19-42 Diesel Hammer"
+    },
+    {
+      "EquipmentName": "Eskridge Auger Drive"
+    },
+    {
+      "EquipmentName": "Digga Drive Head"
+    },
+    {
+      "EquipmentName": "Digga 16ADS Drive Head"
+    },
+    {
+      "EquipmentName": "AB Chance Torque Indicator"
+    },
+    {
+      "EquipmentName": "Ingersoll-Rand Air Compressor"
+    },
+    {
+      "EquipmentName": "Chicago Pneumatic Air Compressor"
+    },
+    {
+      "EquipmentName": "Manitowoc 10000"
+    },
+    {
+      "EquipmentName": "Manitowoc 2900"
+    },
+    {
+      "EquipmentName": "Stihl Chainsaw"
+    },
+    {
+      "EquipmentName": "Gang Box"
+    },
+    {
+      "EquipmentName": "Welding Rod"
+    },
+    {
+      "EquipmentName": "Torches"
+    },
+    {
+      "EquipmentName": "OX300"
+    },
+    {
+      "EquipmentName": "AC5"
     }
   ],
   "phases": [
     {
-      "PhaseName": "phase2"
+      "PhaseName": "Down Time"
+    },
+    {
+      "PhaseName": "Mobilization"
+    },
+    {
+      "PhaseName": "Demobilization"
+    },
+    {
+      "PhaseName": "Orientation/Safety Meeting"
+    },
+    {
+      "PhaseName": "Unload Trailer"
+    },
+    {
+      "PhaseName": "Unload Trucks"
+    },
+    {
+      "PhaseName": "Move Equipment"
+    },
+    {
+      "PhaseName": "Prep for Job"
+    },
+    {
+      "PhaseName": "Clean Yard"
+    },
+    {
+      "PhaseName": "Work on Equipment-Yard"
+    },
+    {
+      "PhaseName": "Install Lagging"
+    },
+    {
+      "PhaseName": "Install Waler"
+    },
+    {
+      "PhaseName": "Install Wale Cap"
+    },
+    {
+      "PhaseName": "Install Bracing"
+    },
+    {
+      "PhaseName": "Cut-off Waler"
+    },
+    {
+      "PhaseName": "Cut-off Piers"
+    },
+    {
+      "PhaseName": "Cut-off Bracing"
+    },
+    {
+      "PhaseName": "Install Handrail"
+    },
+    {
+      "PhaseName": "Drive Timber Pile"
+    },
+    {
+      "PhaseName": "Cut-off Timber Pile"
+    },
+    {
+      "PhaseName": "Tieback Testing"
+    },
+    {
+      "PhaseName": "Drive Sheet Pile"
+    },
+    {
+      "PhaseName": "Cut-off Sheets"
+    },
+    {
+      "PhaseName": "Cut-off H-Pile"
+    },
+    {
+      "PhaseName": "Extract Sheets"
+    },
+    {
+      "PhaseName": "Welding"
+    },
+    {
+      "PhaseName": "Splice Beams"
+    },
+    {
+      "PhaseName": "Install Cofferdam"
+    },
+    {
+      "PhaseName": "Install Shear Studs"
+    },
+    {
+      "PhaseName": "Cap Piers"
+    },
+    {
+      "PhaseName": "Drill/Set H-Pile"
+    },
+    {
+      "PhaseName": "Caissons"
+    },
+    {
+      "PhaseName": "Install Auger Cast Piles"
+    },
+    {
+      "PhaseName": "Install Helical Piers"
+    },
+    {
+      "PhaseName": "Install Casing"
+    },
+    {
+      "PhaseName": "Remove Casing"
+    },
+    {
+      "PhaseName": "Set Tie-Backs"
+    },
+    {
+      "PhaseName": "Digging"
+    },
+    {
+      "PhaseName": "Concrete"
+    },
+    {
+      "PhaseName": "Grade Sheeting"
+    },
+    {
+      "PhaseName": "Backfilled Bays"
+    },
+    {
+      "PhaseName": "Dug Out Bays"
+    },
+    {
+      "PhaseName": "Install Anchors"
     }
   ]
 }
