@@ -39,6 +39,12 @@
       "EquipmentName": "2022 Ford F-250"
     },
     {
+      "EquipmentName": "2012 Ford F-250"
+    },
+    {
+      "EquipmentName": "Boom Truck"
+    },
+    {
       "EquipmentName": "CAT 336 EL Excavator"
     },
     {
@@ -63,7 +69,7 @@
       "EquipmentName": "American Tag Trailer"
     },
     {
-      "EquipmentName": "42' Trailer"
+      "EquipmentName": "48' Trailer"
     },
     {
       "EquipmentName": "45' Trailer"
@@ -210,6 +216,9 @@
     },
     {
       "PhaseName": "Drive Sheet Pile"
+    },
+    {
+      "PhaseName": "Drive H-Pile"
     },
     {
       "PhaseName": "Cut-off Sheets"
