@@ -167,6 +167,9 @@
       "PhaseName": "Down Time"
     },
     {
+      "PhaseName": "SICKTIME"
+    },
+    {
       "PhaseName": "Mobilization"
     },
     {
